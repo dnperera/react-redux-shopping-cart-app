@@ -6,3 +6,18 @@ export const postBooks = book => {
     payload: book
   };
 };
+//Delete Book
+export const deleteBook = id => {
+  return {
+    type: "DELETE_BOOK",
+    payload: id
+  };
+};
+
+//Update Book
+export const updateBook = book => {
+  return {
+    type: "UPDATE_BOOK",
+    payload: book
+  };
+};

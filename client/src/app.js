@@ -3,7 +3,7 @@ import { createStore } from "redux";
 import reducers from "./reducers/index";
 //Import cation action creator
 import { addToCart } from "./actions/cartActions";
-import { postBooks } from "./actions/bookActions";
+import { postBooks, deleteBook, updateBook } from "./actions/bookActions";
 const store = createStore(reducers);
 
 store.subscribe(() => {
@@ -34,6 +34,16 @@ store.dispatch(
       price: 55.5
     }
   ])
+);
+//Dispatch delete book
+store.dispatch(deleteBook({ id: 1 }));
+
+//Dispatch update Book
+store.dispatch(
+  updateBook({
+    id: 2,
+    title: "Russian Roulette: The Inside Story of Putins War on America"
+  })
 );
 //Dispatch Action addtocart
 store.dispatch(addToCart([{ id: 1 }]));
