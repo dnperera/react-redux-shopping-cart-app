@@ -1,50 +1,48 @@
-import { createStore } from "redux";
+import React, { Component } from "react";
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+//logger display (log) redux state on the chrome developer console
+import { logger } from "redux-logger";
 //Import Combine reducer
 import reducers from "./reducers/index";
 //Import cation action creator
 import { addToCart } from "./actions/cartActions";
 import { postBooks, deleteBook, updateBook } from "./actions/bookActions";
-const store = createStore(reducers);
 
-store.subscribe(() => {
-  console.log("current state is --", store.getState());
-});
+//Import BookList
+import BookList from "./components/pages/bookList";
+
+//Create redux store and apply middle ware
+const middleWare = applyMiddleware(logger);
+const store = createStore(reducers, middleWare);
+
 //Dispatch Post Book Action
-store.dispatch(
-  postBooks([
-    {
-      id: 1,
-      title: "Harry Poter and Life",
-      decription:
-        "This is  a series of books which will explain the child hood of Harry",
-      price: 35.5
-    },
-    {
-      id: 2,
-      title: "Russian Election Hack",
-      decription:
-        "This is  a series of books which will explain truth behind the 2016 election",
-      price: 45.5
-    },
-    {
-      id: 3,
-      title: "Loard of the Rings",
-      decription:
-        "This is  a series of books which will explain the child hood of Loard and ring",
-      price: 55.5
-    }
-  ])
-);
-//Dispatch delete book
-store.dispatch(deleteBook({ id: 1 }));
+// store.dispatch(
+//   postBooks([
 
-//Dispatch update Book
-store.dispatch(
-  updateBook({
-    id: 2,
-    title: "Russian Roulette: The Inside Story of Putins War on America"
-  })
-);
-//Dispatch Action addtocart
-store.dispatch(addToCart([{ id: 1 }]));
-//to get the current state of the store
+//   ])
+// );
+
+class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <BookList />
+      </Provider>
+    );
+  }
+}
+export default App;
+// //Dispatch delete book
+// store.dispatch(deleteBook({ id: 1 }));
+
+// //Dispatch update Book
+// store.dispatch(
+//   updateBook({
+//     id: 2,
+//     title: "Russian Roulette: The Inside Story of Putins War on America"
+//   })
+// );
+// //Dispatch Action addtocart
+// store.dispatch(addToCart([{ id: 1 }]));
+// //to get the current state of the store
