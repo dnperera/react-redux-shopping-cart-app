@@ -10,16 +10,16 @@ Replicate e-commerse site's shopping cart .
 
 ## Technology,Frameworks & APIs Used:
 
-React,Redux,Redux-Thunk,Bootstrap,Webpack,Babel
+React,Redux,Node JS,Redux-Thunk,Bootstrap,Webpack,Babel
 
 ## How to install and run the app :
 
-1.  you clone the app from git hub
-2.  then go to the folder name 'client'.
-3.  then run 'npm install' in command line
-4.  once installation completed . do 'npm run start'
+1.  Clone the app from GitHub repo.
+2.  then go to the folder name **'client'**.
+3.  then run **'npm install'** in command line
+4.  once installation completed . do **'npm run start'**
 
-### \*\*\*\* Note if you are planing to test the app in Safari or FireFox or IE , Please remove the Redux-Chrome extension in 'store.js' file.
+### \*\*\*\* Special Note : if you are planing to test the app in Safari or FireFox or IE , Please remove the Redux-Chrome extension in 'store.js' file.
 
 ### Initial Cart View
 
