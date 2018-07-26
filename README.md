@@ -2,6 +2,8 @@
 
 App is desgined to display purchase summary of the items with discounts
 
+### [Click here to view the app](https://stormy-dawn-39416.herokuapp.com/)
+
 ![Screen view of current items](readme-images/react-redux-cart-final-view.png)
 
 ## Motivation :
