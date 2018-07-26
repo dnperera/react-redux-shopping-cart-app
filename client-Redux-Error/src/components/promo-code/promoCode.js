@@ -13,7 +13,12 @@ import {
   ControlLabel
 } from "react-bootstrap";
 
-class PromoCodeDiscount extends Component {
+class PromoCode extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = { show: false, promoCode: "" };
+  // }
+
   constructor(props, context) {
     super(props, context);
 
@@ -21,11 +26,16 @@ class PromoCodeDiscount extends Component {
       show: false
     };
   }
-
-  handleChange = e => {
+  handleChange(e) {
+    //this.setState({ promoCode: e.target.value });
+    console.log("promo code at the componnt--", e.target.value);
     this.props.handleChange(e);
-  };
+  }
 
+  // onSubmit(e) {
+  //   e.preventDefault();
+  //   this.props.applyDiscount(this.state.promoCode);
+  // }
   render() {
     return (
       <div>
@@ -35,7 +45,7 @@ class PromoCodeDiscount extends Component {
           onClick={() => this.setState({ show: !this.state.show })}
         >
           {this.state.show === false ? `Apply ` : `Hide `}
-          promo code {this.state.show === false ? `+` : `-`}
+          promo code {this.state.show === false ? ` +` : ` -`}
         </Button>
         <Collapse in={this.state.show}>
           <div>
@@ -54,10 +64,11 @@ class PromoCodeDiscount extends Component {
                     </FormGroup>{" "}
                     <Button
                       block
+                      //type="submit"
                       bsStyle="primary"
                       className="btn-round"
-                      disabled={this.props.isPromoApplied}
-                      onClick={this.props.applyDiscount}
+                      disabled={this.props.isDisabled}
+                      onClick={this.props.giveDiscount}
                     >
                       Apply
                     </Button>
@@ -71,7 +82,6 @@ class PromoCodeDiscount extends Component {
     );
   }
 }
-
 const mapStateToProps = state => ({
   promoCode: state.promoCode.value
 });
