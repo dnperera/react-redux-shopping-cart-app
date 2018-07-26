@@ -1,0 +1,30 @@
+{
+  "name": "react-redux-shopping-cart",
+  "version": "1.0.0",
+  "description": "shopping car app with react and redux",
+  "main": "index.js",
+  "dependencies": {
+    "react": "^16.3.2",
+    "react-bootstrap": "^0.32.1",
+    "react-dom": "^16.3.2",
+    "react-redux": "^5.0.7",
+    "react-scripts": "1.1.4",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dnperera/react-redux-shopping-cart-app.git"
+  },
+  "author": "Dayan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dnperera/react-redux-shopping-cart-app/issues"
+  },
+  "homepage": "https://github.com/dnperera/react-redux-shopping-cart-app#readme"
+}

@@ -12,12 +12,12 @@ class PickupSavings extends Component {
     );
     return (
       <Row className="show-grid">
-        <Col md={6}>
+        <Col md={6} xs={8}>
           <OverlayTrigger placement="bottom" overlay={tooltip}>
             <div className="pickup-savings">Pickup Savings</div>
           </OverlayTrigger>
         </Col>
-        <Col className="total-savings" md={6}>
+        <Col className="total-savings" md={6} xs={4}>
           ${this.props.price}
         </Col>
       </Row>

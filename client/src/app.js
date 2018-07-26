@@ -3,7 +3,6 @@ import { Grid } from "react-bootstrap";
 import { connect } from "react-redux";
 import { handleChange } from "./actions/promoActions";
 import "./styles.css";
-
 import SubTotal from "./components/subTotal/subTotal";
 import PickupSavings from "./components/pickup-savings/pickupSavings";
 import TaxesFees from "./components/taxes-fees/taxesFees";
@@ -14,12 +13,11 @@ import PromoCode from "./components/promo-code/promoCode";
 class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      total: 150,
-      pickupSavings: -15,
+      total: 200,
+      pickupSavings: -10,
       taxes: 0,
-      estimatedTotal: 135,
+      estimatedTotal: 0,
       isPromoApplied: false
     };
   }
@@ -39,9 +37,9 @@ class App extends Component {
     );
   }
 
-  applyDiscount = () => {
-    //Assume 'DISCOUNT' value is 10%
+  applyDiscount() {
     if (this.props.promoCode === "DISCOUNT") {
+      //Assume Value of the discount as 10%
       this.setState(
         { estimatedTotal: this.state.estimatedTotal * 0.9 },
         function() {
@@ -49,8 +47,7 @@ class App extends Component {
         }
       );
     }
-  };
-
+  }
   render() {
     return (
       <div className="container">
@@ -62,7 +59,7 @@ class App extends Component {
           <EstimatedTotal total={this.state.estimatedTotal.toFixed(2)} />
           <ItemDetails price={this.state.total.toFixed(2)} />
           <PromoCode
-            applyDiscount={() => this.applyDiscount()}
+            applyDiscount={() => this.applyDiscount.call(this)}
             isPromoApplied={this.state.isPromoApplied}
           />
         </Grid>
@@ -71,6 +68,7 @@ class App extends Component {
   }
 }
 
+// export default connect(mapStateToProps)(App);
 const mapStateToProps = state => ({
   promoCode: state.promoCode.discount
 });

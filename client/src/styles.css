@@ -1,13 +1,23 @@
 .container {
-  margin-top: 10px;
+  margin: 20px auto;
 }
 
 .shopping-cart {
-  width: 350px;
+  width: 40%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   padding: 1em;
+  border: 1px solid black;
+  border-radius: 7px;
 }
-
+@media screen and (max-width: 600px) {
+  .shopping-cart {
+    width: 90%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 1em;
+    border: 1px solid black;
+    border-radius: 7px;
+  }
+}
 .shopping-cart > .show-grid {
   padding-bottom: 1.5em;
 }
@@ -28,11 +38,24 @@
   outline: none;
 }
 
-.btn-round {
+.apply-button {
   border-radius: 17px;
+  padding: 10px 16px;
+  transition: all 0.4s;
+}
+.apply-button:hover {
+  transform: translateY(-3px);
+}
+.apply-button:focus {
+  outline: none;
 }
 
 .price-strike {
   text-decoration-line: line-through;
   color: grey;
+}
+
+.est-total {
+  font-size: 20px;
+  font-weight: 700;
 }

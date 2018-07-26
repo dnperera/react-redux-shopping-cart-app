@@ -13,18 +13,17 @@ import {
   ControlLabel
 } from "react-bootstrap";
 
-class PromoCodeDiscount extends Component {
-  constructor(props, context) {
-    super(props, context);
+class PromoCode extends Component {
+  constructor(props) {
+    super(props);
 
     this.state = {
       show: false
     };
   }
-
-  handleChange = e => {
-    this.props.handleChange(e);
-  };
+  handleChange(e) {
+    this.props.handleChange(e.target.value);
+  }
 
   render() {
     return (
@@ -35,13 +34,13 @@ class PromoCodeDiscount extends Component {
           onClick={() => this.setState({ show: !this.state.show })}
         >
           {this.state.show === false ? `Apply ` : `Hide `}
-          promo code {this.state.show === false ? `+` : `-`}
+          promo code {this.state.show === false ? ` +` : ` -`}
         </Button>
         <Collapse in={this.state.show}>
           <div>
             <Well>
               <Row className="show-grid">
-                <Col md={12}>
+                <Col md={6} xs={8}>
                   <Form>
                     <FormGroup controlId="formInlineName">
                       <ControlLabel>Promo Code</ControlLabel>{" "}
@@ -49,19 +48,23 @@ class PromoCodeDiscount extends Component {
                         type="text"
                         placeholder="Enter promo code"
                         value={this.props.promoCode}
-                        onChange={this.handleChange}
+                        onChange={this.handleChange.bind(this)}
                       />
                     </FormGroup>{" "}
-                    <Button
-                      block
-                      bsStyle="primary"
-                      className="btn-round"
-                      disabled={this.props.isPromoApplied}
-                      onClick={this.props.applyDiscount}
-                    >
-                      Apply
-                    </Button>
                   </Form>
+                </Col>
+                <Col md={6} xs={4}>
+                  <br />
+                  <Button
+                    bsStyle={
+                      this.props.isPromoApplied === false ? "success" : "danger"
+                    }
+                    className="apply-button"
+                    disabled={this.props.isPromoApplied}
+                    onClick={this.props.applyDiscount}
+                  >
+                    Apply
+                  </Button>
                 </Col>
               </Row>
             </Well>
@@ -71,12 +74,12 @@ class PromoCodeDiscount extends Component {
     );
   }
 }
-
 const mapStateToProps = state => ({
-  promoCode: state.promoCode.value
+  promoCode: state.promoCode.discount
 });
 
+//Bind with Redux
 export default connect(
   mapStateToProps,
   { handleChange }
-)(PromoCodeDiscount);
+)(PromoCode);

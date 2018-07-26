@@ -12,27 +12,18 @@ import ItemDetails from "./components/item-details/itemDetails";
 import PromoCode from "./components/promo-code/promoCode";
 
 class App extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     total: 150,
-  //     pickupSavings: -15,
-  //     taxes: 0,
-  //     estimatedTotal: 135,
-  //     isPromoApplied: false
-  //   };
-  // }
   constructor(props) {
     super(props);
 
     this.state = {
-      total: 100,
+      total: 150,
+      pickupSavings: -15,
       taxes: 0,
-      pickupSavings: -3.85,
-      estimatedTotal: 0,
-      disablePromoButton: false
+      estimatedTotal: 135,
+      isPromoApplied: false
     };
   }
+
   componentDidMount() {
     //Assume local take rate as 9%
     this.setState(
@@ -48,17 +39,18 @@ class App extends Component {
     );
   }
 
-  applyDiscount() {
-    console.log(this.props);
-    // if (this.props.promoCode === "DISCOUNT") {
-    //   this.setState(
-    //     { estimatedTotal: this.state.estimatedTotal * 0.1 },
-    //     function() {
-    //       this.setState({ isPromoApplied: true });
-    //     }
-    //   );
-    // }
-  }
+  applyDiscount = () => {
+    //Assume 'DISCOUNT' value is 10%
+    if (this.props.promoCode === "DISCOUNT") {
+      this.setState(
+        { estimatedTotal: this.state.estimatedTotal * 0.9 },
+        function() {
+          this.setState({ isPromoApplied: true });
+        }
+      );
+    }
+  };
+
   render() {
     return (
       <div className="container">
@@ -70,23 +62,17 @@ class App extends Component {
           <EstimatedTotal total={this.state.estimatedTotal.toFixed(2)} />
           <ItemDetails price={this.state.total.toFixed(2)} />
           <PromoCode
-            giveDiscount={() => this.giveDiscountHandler()}
-            isDisabled={this.state.disablePromoButton}
+            applyDiscount={() => this.applyDiscount()}
+            isPromoApplied={this.state.isPromoApplied}
           />
         </Grid>
       </div>
     );
   }
 }
-// const mapStateToProps = state => {
-//   return {
-//     promoCode: state.promoDiscount.discount
-//   };
-// };
 
-// export default connect(mapStateToProps)(App);
 const mapStateToProps = state => ({
-  promoCode: state.promoCode.value
+  promoCode: state.promoCode.discount
 });
 
 export default connect(

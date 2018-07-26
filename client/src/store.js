@@ -1,21 +1,23 @@
-// Import createStore and applyMiddleware
-import { createStore, applyMiddleware, compose } from 'redux';
-// Import thunk
-import thunk from 'redux-thunk';
-// Import root reducer
-import rootReducer from './reducers';
+/**
+ * Create the Redux Store and apply middle ware .
+ * optionally- chrome redux dev tool extension for develop perpose
+ */
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
+import rootReducer from "./reducers";
 
 const initialState = {};
-
-const middleware = [thunk];
+const middleWare = [thunk];
 
 const store = createStore(
   rootReducer,
   initialState,
-  compose(
-    applyMiddleware(...middleware),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
-  )
+  applyMiddleware(...middleWare)
+  // compose(
+  //   applyMiddleware(...middleWare),
+  //   //Redux Chrome Extension
+  //   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  // )
 );
 
 export default store;

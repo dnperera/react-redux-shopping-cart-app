@@ -37,14 +37,14 @@ class ItemDetails extends Component {
                     Mixer,Tangerine (KSM150PSTG)
                   </p>
                   <Row className="show-grid">
-                    <Col md={6}>
+                    <Col md={6} xs={8}>
                       <strong>${this.props.price}</strong>
                       <br />
                       <strong className="price-strike">
                         ${this.props.price}
                       </strong>
                     </Col>
-                    <Col md={6}>
+                    <Col md={6} xs={4}>
                       <strong>Qty: 1</strong>
                     </Col>
                   </Row>
