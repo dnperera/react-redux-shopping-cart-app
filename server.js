@@ -3,7 +3,8 @@ const path = require("path");
 const port = process.env.PORT || 5000;
 const app = express();
 
-app.use(express.static(__dirname));
+//set the static assets
+app.use(express.static("client/public"));
 
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "client", "public", "index.html"));
