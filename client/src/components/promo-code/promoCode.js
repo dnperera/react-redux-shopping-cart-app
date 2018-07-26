@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { handleChange } from "../../actions/promoActions";
+import { applyPromo } from "../../actions/promoActions";
 import {
   Row,
   Col,
@@ -18,13 +18,19 @@ class PromoCode extends Component {
     super(props);
 
     this.state = {
+      promoCode: "",
       show: false
     };
   }
-  handleChange(e) {
-    this.props.handleChange(e.target.value);
-  }
 
+  //update state promoCode with new Code
+  setValue(e) {
+    this.setState({ promoCode: e.target.value });
+  }
+  applyDiscount() {
+    console.log("Promocode in applyDis --", this.state.promoCode);
+    this.props.applyPromo(this.state.promoCode);
+  }
   render() {
     return (
       <div>
@@ -47,8 +53,8 @@ class PromoCode extends Component {
                       <FormControl
                         type="text"
                         placeholder="Enter promo code"
-                        value={this.props.promoCode}
-                        onChange={this.handleChange.bind(this)}
+                        value={this.state.promoCode}
+                        onChange={this.setValue.bind(this)}
                       />
                     </FormGroup>{" "}
                   </Form>
@@ -61,7 +67,7 @@ class PromoCode extends Component {
                     }
                     className="apply-button"
                     disabled={this.props.isPromoApplied}
-                    onClick={this.props.applyDiscount}
+                    onClick={this.applyDiscount.bind(this)}
                   >
                     Apply
                   </Button>
@@ -74,12 +80,9 @@ class PromoCode extends Component {
     );
   }
 }
-const mapStateToProps = state => ({
-  promoCode: state.promoCode.discount
-});
 
 //Bind with Redux
 export default connect(
-  mapStateToProps,
-  { handleChange }
+  null,
+  { applyPromo }
 )(PromoCode);

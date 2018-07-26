@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Grid } from "react-bootstrap";
 import { connect } from "react-redux";
-import { handleChange } from "./actions/promoActions";
+import { applyPromo } from "./actions/promoActions";
 import "./styles.css";
 import SubTotal from "./components/subTotal/subTotal";
 import PickupSavings from "./components/pickup-savings/pickupSavings";
@@ -36,7 +36,17 @@ class App extends Component {
       }
     );
   }
-
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.promoCode && nextProps.promoCode === "DISCOUNT") {
+      //Assume Value of the discount as 10%
+      this.setState(
+        { estimatedTotal: this.state.estimatedTotal * 0.9 },
+        function() {
+          this.setState({ isPromoApplied: true });
+        }
+      );
+    }
+  }
   applyDiscount() {
     if (this.props.promoCode === "DISCOUNT") {
       //Assume Value of the discount as 10%
@@ -58,10 +68,7 @@ class App extends Component {
           <hr />
           <EstimatedTotal total={this.state.estimatedTotal.toFixed(2)} />
           <ItemDetails price={this.state.total.toFixed(2)} />
-          <PromoCode
-            applyDiscount={() => this.applyDiscount.call(this)}
-            isPromoApplied={this.state.isPromoApplied}
-          />
+          <PromoCode isPromoApplied={this.state.isPromoApplied} />
         </Grid>
       </div>
     );
@@ -76,6 +83,6 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {
-    handleChange
+    applyPromo
   }
 )(App);

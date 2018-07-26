@@ -1,6 +1,5 @@
 import { PROMO_CODE } from "./types";
 
-export const handleChange = dicount => dispatch => {
-  console.log(" in action creator actions ", dicount);
+export const applyPromo = dicount => dispatch => {
   dispatch({ type: PROMO_CODE, payload: dicount });
 };
