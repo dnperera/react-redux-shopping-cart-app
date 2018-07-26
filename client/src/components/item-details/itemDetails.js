@@ -27,21 +27,18 @@ class ItemDetails extends Component {
                   <img
                     width={100}
                     height={100}
-                    src="https://i5.walmartimages.com/asr/af20cfe2-7758-494f-9978-92488b837554_1.80c1a436a7195109903dd3e430f61fba.jpeg?odnWidth=undefined&odnHeight=undefined&odnBg=ffffff"
+                    src={this.props.url}
                     alt="thumbnail"
                   />
                 </Media.Left>
                 <Media.Body>
-                  <p>
-                    KitchenAid Artisan Series 5 Quart Tilt-Head Stand
-                    Mixer,Tangerine (KSM150PSTG)
-                  </p>
+                  <p>{this.props.title}</p>
                   <Row className="show-grid">
                     <Col md={6} xs={8}>
                       <strong>${this.props.price}</strong>
                       <br />
                       <strong className="price-strike">
-                        ${this.props.price}
+                        ${this.props.listPrince}
                       </strong>
                     </Col>
                     <Col md={6} xs={4}>

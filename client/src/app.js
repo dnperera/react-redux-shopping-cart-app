@@ -10,6 +10,8 @@ import EstimatedTotal from "./components/estimated-total/estimatedTotal";
 import ItemDetails from "./components/item-details/itemDetails";
 import PromoCode from "./components/promo-code/promoCode";
 
+//load json data
+import data from "./data/items.json";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -18,15 +20,32 @@ class App extends Component {
       pickupSavings: -10,
       taxes: 0,
       estimatedTotal: 0,
-      isPromoApplied: false
+      isPromoApplied: false,
+      title: "",
+      url: "",
+      listPrince: ""
     };
   }
 
   componentDidMount() {
+    //Load the data and randomly select item
+    const noOfItems = data.length;
+    const itemNo = Math.floor(Math.random() * noOfItems);
+    const randomItem = data[itemNo];
     //Assume local take rate as 9%
     this.setState(
       {
-        taxes: (this.state.total + this.state.pickupSavings) * 0.09
+        total: parseFloat(randomItem["price"]),
+        pickupSavings: -1 * parseFloat(randomItem["pickupSaving"]),
+        taxes:
+          (parseFloat(randomItem["price"]) +
+            -1 * parseFloat(randomItem["pickupSaving"])) *
+          0.09,
+        estimatedTotal: 0,
+        isPromoApplied: false,
+        title: randomItem["title"],
+        url: randomItem["url"],
+        listPrince: randomItem["listPrince"]
       },
       function() {
         this.setState({
@@ -67,7 +86,12 @@ class App extends Component {
           <TaxesFees taxes={this.state.taxes.toFixed(2)} />
           <hr />
           <EstimatedTotal total={this.state.estimatedTotal.toFixed(2)} />
-          <ItemDetails price={this.state.total.toFixed(2)} />
+          <ItemDetails
+            title={this.state.title}
+            url={this.state.url}
+            price={this.state.total.toFixed(2)}
+            listPrince={this.state.listPrince}
+          />
           <PromoCode isPromoApplied={this.state.isPromoApplied} />
         </Grid>
       </div>
